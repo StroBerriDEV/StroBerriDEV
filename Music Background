@@ -1,0 +1,19 @@
+//This code will make your background music run forever at any given scene.
+//Make a GameObject where you will place your background music.
+//ADD Audio Listener and AudioSource at the gameObject and then add this script.
+//CREATE A NEW TAG. AND DON'T FORGET TO USE IT ON THE GAMEOBJECT. 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ForeverMusic : MonoBehaviour
+{
+	void Awake ()
+	{
+	GameObject [] objs = GameObject.FindGameObjectsWithTag("music");
+	if(objs.Length > 1)
+		Destroy(this.gameObject);
+
+	DontDestroyOnLoad(this.gameObject);
+	}
+}
