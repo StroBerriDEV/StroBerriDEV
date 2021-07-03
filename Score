@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Score : MonoBehaviour
+{
+    //Remove this "Text highScore" if you don't want to include a highscore feature in your game
+    public Text highScore;
+    public static int score = 0;
+
+    private void Start()
+    {
+        score = 0;	
+    }
+
+    private void Update()
+    {
+        GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+	  
+    //Part of the highScore
+  	if (score > PlayerPrefs.GetInt("HighScore", 0))
+  	{
+	  PlayerPrefs.SetInt("HighScore", score);
+	  highScore.text = score.ToString();
+	  }      
+    }
+}
+//END
+
+//NEW CODE
+//Adds score
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AddScore : MonoBehaviour
+{
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Score.score++;
+        
+        //Plays a sound when the player collides with a box
+        //The name depends on the name of the song that you put in the AudioManager
+        FindObjectOfType<AudioManager>().Play("Scored");
+    }
+}
