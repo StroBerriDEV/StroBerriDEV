@@ -45,3 +45,20 @@ public class AddScore : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Scored");
     }
 }
+//END
+
+//NEW
+//Make a UI text and put this script on it. This will show the highscore of the player. While the one at the top records the highscore
+using UnityEngine;
+using UnityEngine.UI;
+
+public class YourLimits : MonoBehaviour
+{
+    public Text highScore;
+    
+    void Start()
+    {
+        highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+    }
+}
+
