@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    //Remove this "Text highScore" if you don't want to include a highscore feature in your game
+    //Remove this "Text highScore" if you don't want to include a highscore feature in your game.
     public Text highScore;
     public static int score = 0;
 
