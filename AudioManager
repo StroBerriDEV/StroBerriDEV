@@ -1,3 +1,4 @@
+//This code manages your sound effects. This NOT include the background music
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
