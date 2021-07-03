@@ -1,3 +1,4 @@
+//Make a canvas and make a text under it and then put this script in it. This will show how much score you have.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,7 @@ public class Score : MonoBehaviour
 //END
 
 //NEW CODE
-//Adds score
+//This code adds score everytime the player collided with a box
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
