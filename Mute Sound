@@ -1,0 +1,74 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SoundOnAndOff : MonoBehaviour
+{
+    [SerializeField] Image soundOnIcon;
+    [SerializeField] Image soundOffIcon;
+    private bool muted = false;
+
+    void Start()
+    {
+        //Kapag walang naka-save na Settings yung player eh iseset ng system sa 0 na equals sa false.
+        if (!PlayerPrefs.HasKey("muted"))
+        {
+            PlayerPrefs.SetInt("muted", 0);
+            Load();
+        }
+        else
+        {
+            Load();
+        }
+
+        UpdateButtonIcon();
+        AudioListener.pause = muted;
+    }
+
+    public void OnButtonPress()
+    {
+        //Kapag hindi naka mute ang button, ay gagawin nitong naka mute.
+        if(muted == false)
+        {
+            muted = true;
+            AudioListener.pause = true;
+        }
+        //Kapag already muted na naman ay ia-unmute niya ito.
+        else
+        {
+            muted = false;
+            AudioListener.pause = false;
+        }
+        //Pag pinindot mo yung button. Tatawagin niya tong 2 functions na to.
+        Save();
+        UpdateButtonIcon();
+    }
+
+    private void UpdateButtonIcon()
+    {
+        //Kapag hindi naka-mute, naka-on yung SoundOnIcon.
+        if(muted == false)
+        {
+            soundOnIcon.enabled = true;
+            soundOffIcon.enabled = false;
+        }
+        //Kapag naka-mute, naka-on yung SoundOffIcon.
+        else
+        {
+            soundOnIcon.enabled = false;
+            soundOffIcon.enabled = true;
+        }
+    }
+
+    private void Load()
+    {
+        muted = PlayerPrefs.GetInt("muted") == 1;
+    }
+
+    private void Save()
+    {
+        //If muted is true then it is equals to 1 : If muted is false then it is equal to 0.
+        PlayerPrefs.SetInt("muted", muted ? 1 : 0);
+    }
+}
