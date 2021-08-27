@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharManager : MonoBehaviour
+{
+    public CharDatabase characterDB;
+    private int selectedOption = 0;
+
+    void Start()
+    {
+        UpdateChar(selectedOption);
+    }
+
+    public void NextOption()
+    {
+        selectedOption++;
+
+        if(selectedOption >= characterDB.CharCount)
+        {
+            selectedOption = 0;
+        }
+
+        UpdateChar(selectedOption);
+    }
+
+    public void BackOption()
+    {
+        selectedOption--;
+
+        if(selectedOption < 0)
+        {
+            selectedOption = characterDB.CharCount - 1;
+        }
+
+        UpdateChar(selectedOption);
+    }
+
+    private void UpdateChar(int selectedOption)
+    {
+        Characters character = characterDB.GetCharacter(selectedOption);
+        //incomplete
+    }
+}
