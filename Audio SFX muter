@@ -1,0 +1,63 @@
+       void Start()
+    {
+        SFX.SetActive(noSound);
+        //Kapag walang naka-save na Settings yung player eh iseset ng system sa 0 na equals sa false.
+        if (!PlayerPrefs.HasKey("noSound"))
+        {
+            PlayerPrefs.SetInt("noSound", 0);
+            Load();
+        }
+        else
+        {
+            Load();
+        }
+
+        UpdateButtonIcon();
+        
+    }
+    
+    public void OnButtonPress()
+    {
+        //Kapag hindi naka mute ang button, ay gagawin nitong naka mute.
+        if (noSound == false)
+        {
+            noSound = true;
+            SFX.SetActive(false);
+        }
+        //Kapag already noSound na naman ay ia-unmute niya ito.
+        else
+        {
+            noSound = false;
+            SFX.SetActive(true);
+        }
+        //Pag pinindot mo yung button. Tatawagin niya tong 2 functions na to.
+        Save();
+        UpdateButtonIcon();
+    }
+
+    private void UpdateButtonIcon()
+    {
+        //Kapag hindi naka-mute, naka-on yung musicOnIcon.
+        if (noSound == false)
+        {
+            musicOnIcon.enabled = true;
+            musicOffIcon.enabled = false;
+        }
+        //Kapag naka-mute, naka-on yung musicOffIcon.
+        else
+        {
+            musicOnIcon.enabled = false;
+            musicOffIcon.enabled = true;
+        }
+    }
+
+    private void Load()
+    {
+        noSound = PlayerPrefs.GetInt("noSound") == 1;
+    }
+
+    private void Save()
+    {
+        //If noSound is true then it is equals to 1 : If noSound is false then it is equal to 0.
+        PlayerPrefs.SetInt("noSound", noSound ? 1 : 0);
+    }
